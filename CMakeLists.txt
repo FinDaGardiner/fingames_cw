@@ -12,16 +12,22 @@ SET(OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin/")
 SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${OUTPUT_DIRECTORY})
 
 #### Add External Dependencies ####
+# Disable SFML Audio Module to avoid OpenAL dependency
+set(SFML_BUILD_AUDIO OFF)
+
+# Include the SFML submodule
 add_subdirectory("lib/sfml")
 set(SFML_INCS "lib/sfml/include")
 link_directories("${CMAKE_BINARY_DIR}/lib/sfml/lib")
 
 #### on_the_run ####
+# Include source files for the project
 file(GLOB_RECURSE SOURCES on_the_run/*.cpp on_the_run/*.h)
 add_executable(on_the_run ${SOURCES})
 target_include_directories(on_the_run PRIVATE ${SFML_INCS})
 target_link_libraries(on_the_run sfml-graphics) # Removed sfml-audio
 
+#### Copy Resources ####
 add_custom_target(copy_resources ALL COMMAND ${CMAKE_COMMAND} 
   -E copy_directory
     "${PROJECT_SOURCE_DIR}/res" # Source directory containing resources
@@ -29,3 +35,4 @@ add_custom_target(copy_resources ALL COMMAND ${CMAKE_COMMAND}
 )
 
 add_dependencies(on_the_run copy_resources)
+
