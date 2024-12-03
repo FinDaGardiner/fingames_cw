@@ -15,6 +15,9 @@ SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${OUTPUT_DIRECTORY})
 # Disable SFML Audio Module to avoid OpenAL dependency
 set(SFML_BUILD_AUDIO OFF)
 
+
+set(SFML_BUILD_AUDIO OFF CACHE BOOL "" FORCE)
+
 # Include the SFML submodule
 add_subdirectory("lib/sfml")
 set(SFML_INCS "lib/sfml/include")
