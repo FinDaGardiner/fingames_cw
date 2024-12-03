@@ -6,9 +6,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 project(On_The_Run)
 
 #### Setup Directories ####
-#Main output directory
+# Main output directory
 SET(OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin/")
-# Ouput all DLLs from all libs into main build folder
+# Output all DLLs from all libs into main build folder
 SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${OUTPUT_DIRECTORY})
 
 #### Add External Dependencies ####
@@ -20,7 +20,7 @@ link_directories("${CMAKE_BINARY_DIR}/lib/sfml/lib")
 file(GLOB_RECURSE SOURCES on_the_run/*.cpp on_the_run/*.h)
 add_executable(on_the_run ${SOURCES})
 target_include_directories(on_the_run PRIVATE ${SFML_INCS})
-target_link_libraries(on_the_run sfml-graphics)
+target_link_libraries(on_the_run sfml-graphics) # Removed sfml-audio
 
 add_custom_target(copy_resources ALL COMMAND ${CMAKE_COMMAND} 
   -E copy_directory
